@@ -1,0 +1,1206 @@
+/* ============================================================
+   TEMPLATE: Car Rental Casablanca
+   FILE: style.css
+   HOW TO CUSTOMIZE:
+   - Change --accent-color to your brand color
+   - Change --brand-name font if desired
+   - All spacing/layout is handled by CSS variables below
+   ============================================================ */
+
+/* ── GOOGLE FONTS ────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ── CSS VARIABLES (EASY CUSTOMIZATION) ─────────────────── */
+:root {
+  /* Brand Colors — change these to match your client */
+  --accent-color: #C9A84C;       /* Gold accent */
+  --accent-hover: #e2c06a;
+  --bg-dark: #0D0D0D;
+  --bg-card: #161616;
+  --bg-section: #111111;
+  --bg-alt: #191919;
+  --text-primary: #F0EDE8;
+  --text-muted: #888880;
+  --text-light: #C8C4BC;
+  --border-color: rgba(201,168,76,0.18);
+  --border-subtle: rgba(255,255,255,0.06);
+
+  /* Typography */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Spacing */
+  --section-padding: 100px 0;
+  --container-width: 1200px;
+  --gap: 28px;
+
+  /* Transitions */
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── RESET & BASE ────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── UTILITY ─────────────────────────────────────────────── */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.divider {
+  width: 48px;
+  height: 2px;
+  background: var(--accent-color);
+  margin: 24px 0;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────── */
+/* Primary CTA Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--accent-color);
+  color: #0D0D0D;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(0);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.35);
+}
+
+/* Outline Button */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: transparent;
+  color: var(--accent-color);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: var(--accent-color);
+  color: #0D0D0D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+}
+
+/* WhatsApp Button */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+}
+
+.btn-whatsapp svg,
+.btn-primary svg,
+.btn-outline svg {
+  flex-shrink: 0;
+}
+
+/* ── NAVIGATION ──────────────────────────────────────────── */
+/* [SECTION: NAV] */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo — change business name here */
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.nav-logo .logo-main {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.nav-logo .logo-accent {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Language Switcher — visible on all pages */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.lang-switch:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(201,168,76,0.06);
+}
+
+.lang-switch .lang-flag {
+  font-size: 1rem;
+}
+
+/* Mobile menu toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: var(--transition);
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4.7px, 4.7px);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4.7px, -4.7px);
+}
+
+/* ── HERO SECTION ────────────────────────────────────────── */
+/* [SECTION: HERO] — Change background image in index.html inline style */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+    linear-gradient(135deg, #0D0D0D 0%, #161616 50%, #0f0f0f 100%);
+  z-index: 0;
+}
+
+/* Replace this with your hero image */
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80');
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(13,13,13,0.95) 35%, rgba(13,13,13,0.3) 100%);
+  z-index: 1;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.1s;
+}
+
+.hero-eyebrow .line {
+  width: 36px;
+  height: 1px;
+  background: var(--accent-color);
+}
+
+.hero-eyebrow span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+/* Main headline — change in HTML */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.25s;
+}
+
+.hero-title em {
+  color: var(--accent-color);
+  font-style: normal;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 440px;
+  margin-bottom: 44px;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.55s;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 72px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-subtle);
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.7s;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-color);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ── CARS SECTION ────────────────────────────────────────── */
+/* [SECTION: CARS] */
+.cars-section {
+  padding: var(--section-padding);
+  background: var(--bg-section);
+  position: relative;
+}
+
+.cars-section::before {
+  content: 'FLEET';
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-family: var(--font-display);
+  font-size: 9rem;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+.cars-grid {
+  display: grid;
+  /* Change number of columns here — currently 4 on desktop */
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+
+/* ── CAR CARD COMPONENT ──────────────────────────────────── */
+/*
+  HOW TO ADD A NEW CAR:
+  1. Copy ONE entire <!-- CAR CARD --> block from index.html
+  2. Paste it inside .cars-grid
+  3. Change: image src, car name, category, price
+  4. To HIDE price: add class "no-price" to .car-price element
+  5. To show "Contact for price": change span text
+  THAT'S IT — layout adjusts automatically.
+*/
+.car-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-card:hover {
+  border-color: var(--border-color);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.12);
+}
+
+.car-card-img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: #1a1a1a;
+}
+
+.car-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.car-card:hover .car-card-img img {
+  transform: scale(1.08);
+}
+
+/* Car category badge — e.g. "Économique", "SUV", "Luxe" */
+.car-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.car-card-body {
+  padding: 22px 22px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.car-specs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.car-spec {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.car-spec svg {
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+/*
+  PRICE DISPLAY OPTIONS:
+  - Normal: shows price text as-is
+  - .no-price on .car-price: hides the whole price row
+  - Change inner <span> text to "Contactez-nous" to show that instead
+*/
+.car-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 18px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.car-price.no-price {
+  display: none; /* Simply add class "no-price" to hide price entirely */
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-color);
+  line-height: 1;
+}
+
+.price-currency {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.price-period {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+.price-contact {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── WHY CHOOSE US SECTION ───────────────────────────────── */
+/* [SECTION: WHY US] */
+.why-section {
+  padding: var(--section-padding);
+  background: var(--bg-alt);
+  position: relative;
+  overflow: hidden;
+}
+
+.why-section::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+/* Individual advantage card */
+.advantage-item {
+  padding: 36px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.advantage-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.advantage-item:hover::before {
+  transform: scaleX(1);
+}
+
+.advantage-item:hover {
+  background: #1c1c1c;
+  border-color: rgba(201,168,76,0.12);
+  transform: translateY(-4px);
+}
+
+.advantage-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.advantage-item:hover .advantage-icon {
+  background: rgba(201,168,76,0.08);
+}
+
+.advantage-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.advantage-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── CONTACT SECTION ─────────────────────────────────────── */
+/* [SECTION: CONTACT] */
+.contact-section {
+  padding: var(--section-padding);
+  background: var(--bg-section);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-info-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+
+.contact-info-item:hover {
+  border-color: var(--border-color);
+  background: #1c1c1c;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+  color: var(--accent-color);
+}
+
+.contact-info-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.contact-info-value {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+/* Map placeholder — replace with real embed if needed */
+.map-placeholder {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.map-placeholder:hover {
+  border-color: var(--border-color);
+}
+
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px);
+}
+
+.map-placeholder-icon {
+  color: var(--accent-color);
+  position: relative;
+  z-index: 1;
+}
+
+.map-placeholder-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-cta-block {
+  background: linear-gradient(135deg, rgba(37,211,102,0.08) 0%, rgba(37,211,102,0.02) 100%);
+  border: 1px solid rgba(37,211,102,0.2);
+  padding: 36px;
+  text-align: center;
+}
+
+.whatsapp-cta-block h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.whatsapp-cta-block p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* ── FLOATING WHATSAPP BUTTON ────────────────────────────── */
+/* [COMPONENT: FLOATING WHATSAPP] — Change href in HTML */
+.floating-wa {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: #25D366;
+  color: #fff;
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: var(--transition);
+  animation: pulse-wa 3s infinite;
+}
+
+.floating-wa:hover {
+  background: #1ebe5a;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(37,211,102,0.5);
+  animation: none;
+}
+
+.floating-wa .wa-label {
+  display: block;
+}
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 8px 48px rgba(37,211,102,0.65); }
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+/* [SECTION: FOOTER] */
+.footer {
+  background: #080808;
+  border-top: 1px solid var(--border-subtle);
+  padding: 60px 0 28px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-main {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  display: block;
+  line-height: 1;
+}
+
+.footer-brand .logo-accent {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 18px;
+}
+
+.footer-brand p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 280px;
+}
+
+.footer-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+  padding-left: 4px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.footer-lang {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-lang a {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.footer-lang a:hover,
+.footer-lang a.active {
+  color: var(--accent-color);
+  border-color: var(--border-color);
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-triggered fade in (JS adds .visible class) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+/* ── MOBILE NAV MENU ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    bottom: 0;
+    width: min(320px, 85vw);
+    background: rgba(13,13,13,0.98);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 40px 40px;
+    gap: 28px;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-left: 1px solid var(--border-subtle);
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .cars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 70px 0;
+  }
+
+  .cars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .hero-stats {
+    gap: 32px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .floating-wa .wa-label {
+    display: none;
+  }
+
+  .floating-wa {
+    padding: 14px;
+    clip-path: none;
+    border-radius: 0;
+  }
+
+  .car-card-body {
+    padding: 16px;
+  }
+
+  .car-name {
+    font-size: 1rem;
+  }
+
+  .car-specs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+  }
+
+  .whatsapp-cta-block {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advantages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
